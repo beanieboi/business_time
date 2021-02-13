@@ -3,16 +3,16 @@ require File.expand_path('../helper', __FILE__)
 describe "time extensions" do
   it "know a weekend day is not a workday" do
     assert( Time.parse("April 9, 2010 10:45 am").workday?)
-    assert(!Time.parse("April 10, 2010 10:45 am").workday?)
-    assert(!Time.parse("April 11, 2010 10:45 am").workday?)
+    assert_equal(false, Time.parse("April 10, 2010 10:45 am").workday?)
+    assert_equal(false, Time.parse("April 11, 2010 10:45 am").workday?)
     assert( Time.parse("April 12, 2010 10:45 am").workday?)
   end
 
   it "know a weekend day is not a workday (with a configured work week)" do
     BusinessTime::Config.work_week = %w[sun mon tue wed thu]
     assert( Time.parse("April 8, 2010 10:30am").weekday?)
-    assert(!Time.parse("April 9, 2010 10:30am").weekday?)
-    assert(!Time.parse("April 10, 2010 10:30am").weekday?)
+    assert_equal(false, Time.parse("April 9, 2010 10:30am").weekday?)
+    assert_equal(false, Time.parse("April 10, 2010 10:30am").weekday?)
     assert( Time.parse("April 11, 2010 10:30am").weekday?)
   end
 
@@ -20,8 +20,8 @@ describe "time extensions" do
     BusinessTime::Config.holidays << Date.parse("July 4, 2010")
     BusinessTime::Config.holidays << Date.parse("July 5, 2010")
 
-    assert(!Time.parse("July 4th, 2010 1:15 pm").workday?)
-    assert(!Time.parse("July 5th, 2010 2:37 pm").workday?)
+    assert_equal(false, Time.parse("July 4th, 2010 1:15 pm").workday?)
+    assert_equal(false, Time.parse("July 5th, 2010 2:37 pm").workday?)
   end
 
 
@@ -91,7 +91,7 @@ describe "time extensions" do
 
   it "knows if within business hours" do
     assert(Time.parse("2013-02-01 10:00").during_business_hours?)
-    assert(!Time.parse("2013-02-01 5:00").during_business_hours?)
+    assert_equal(false, Time.parse("2013-02-01 5:00").during_business_hours?)
   end
 
   # =================== .roll_backward ======================
