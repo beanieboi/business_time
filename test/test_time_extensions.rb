@@ -2,18 +2,18 @@ require File.expand_path('../helper', __FILE__)
 
 describe "time extensions" do
   it "know a weekend day is not a workday" do
-    assert( Time.parse("April 9, 2010 10:45 am").workday?)
+    assert(Time.parse("April 9, 2010 10:45 am").workday?)
     assert_equal(false, Time.parse("April 10, 2010 10:45 am").workday?)
     assert_equal(false, Time.parse("April 11, 2010 10:45 am").workday?)
-    assert( Time.parse("April 12, 2010 10:45 am").workday?)
+    assert(Time.parse("April 12, 2010 10:45 am").workday?)
   end
 
   it "know a weekend day is not a workday (with a configured work week)" do
     BusinessTime::Config.work_week = %w[sun mon tue wed thu]
-    assert( Time.parse("April 8, 2010 10:30am").weekday?)
+    assert(Time.parse("April 8, 2010 10:30am").weekday?)
     assert_equal(false, Time.parse("April 9, 2010 10:30am").weekday?)
     assert_equal(false, Time.parse("April 10, 2010 10:30am").weekday?)
-    assert( Time.parse("April 11, 2010 10:30am").weekday?)
+    assert(Time.parse("April 11, 2010 10:30am").weekday?)
   end
 
   it "know a holiday is not a workday" do
