@@ -91,7 +91,7 @@ describe "time extensions" do
 
   it "knows if within business hours" do
     assert(Time.parse("2013-02-01 10:00").during_business_hours?)
-    assert(!Time.parse("2013-02-01 5:00").during_business_hours?)
+    assert_equal(false, Time.parse("2013-02-01 5:00").during_business_hours?)
   end
 
   # =================== .roll_backward ======================
